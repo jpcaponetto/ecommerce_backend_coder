@@ -1,0 +1,49 @@
+<div class="container">
+  <h1> Products </h1>
+  <h2>
+    Page:
+    {{paginateData.page}}
+    - TotalPages:
+    {{paginateData.totalPages}}
+
+  </h2>
+  {{#each paginateData.payload}}
+    <article>
+      <p>
+        <strong>
+          Title:
+          {{title}}
+        </strong>
+      </p>
+      <p>
+        <strong>
+          category:
+          {{category}}
+
+        </strong>
+      </p>
+      <p>
+        <strong>
+          description:
+          {{description}}
+
+        </strong>
+      </p>
+      <p>
+        <strong>
+          stock:
+          {{stock}}
+
+        </strong>
+      </p>
+      <p>
+        <strong>
+          price:
+          {{price}}
+
+        </strong>
+      </p>
+    </article>
+
+  {{/each}}
+</div>
