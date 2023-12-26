@@ -8,8 +8,8 @@ const __filename = url.fileURLToPath(import.meta.url);
 export const _dirname = path.dirname(__filename);
 
 export const generateToken = (user) => {
-  const { firstName, role, email, age } = user;
-  const payload = { firstName, role, email, age };
+  const { firstName, role, email, age, cid } = user;
+  const payload = { firstName, role, email, age, cid };
   return jwt.sign(payload, env.dev.jsonwebtoken.secret, {
     expiresIn: env.dev.jsonwebtoken.expiresIn,
   });

@@ -9,9 +9,9 @@ export const paginateResponse = (out) => {
     totalPages: out.totalPages,
     page: out.page,
     pagingCounter: out.pagingCounter,
-    hashPrevPage: out.hashPrevPage,
-    hashNextPage: out.hashNextPage,
-    prevPage: `${env.dev.api.host}:products?${out.limit}&page=${out.prevPage}`,
-    nextPage: out.nextPage,
+    hasPrevPage: out.hasPrevPage,
+    hasNextPage: out.hasNextPage,
+    prevPage: `${env.dev.api.host}:${env.dev.api.PORT}/products?limit=${out.limit}&page=${out.prevPage}`,
+    nextPage: `${env.dev.api.host}:${env.dev.api.PORT}/products?limit=${out.limit}&page=${out.nextPage}`,
   };
 };

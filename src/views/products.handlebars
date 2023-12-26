@@ -3,10 +3,17 @@
   <h2>
     Page:
     {{paginateData.page}}
-    - TotalPages:
-    {{paginateData.totalPages}}
-
+    {{user.cid}}
   </h2>
+  <div class="grid">
+    <a href="{{paginateData.prevPage}}"  {{#unless paginateData.hasPrevPage}} disabled {{/unless}}  role="button" >Prev </a>
+        <a href="{{paginateData.nextPage}}"  {{#unless paginateData.hasNextPage}} disabled {{/unless}}  role="button" >Next </a>
+    <h2>totalPages: {{paginateData.totalPages}}</h2>
+    
+  </div>
+
+    
+  </div>
   {{#each paginateData.payload}}
     <article>
       <p>

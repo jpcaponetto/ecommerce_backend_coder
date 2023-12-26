@@ -1,7 +1,7 @@
 import userModel from "../../models/user.model.js";
 
-export const createUser = async (body, id) => {
-  const payload = { ...body, id };
+export const createUser = async (body, cid) => {
+  const payload = { ...body, cid };
   const user = await userModel.create(payload);
   return user;
 };
