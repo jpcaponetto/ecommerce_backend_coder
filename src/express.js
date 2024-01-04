@@ -11,6 +11,7 @@ import sessionsRouter from "./routes/sessions.routes.js";
 import router2 from "./routes/views/login.js";
 import productRouter from "./routes/products.routes.js";
 import routerProduct from "./routes/views/renderProduct.js";
+import productRouterApi from "./routes/api/product.routes.js";
 
 const app = express();
 
@@ -27,11 +28,11 @@ app.set("view engine", "handlebars");
 
 initPassport();
 app.use(passport.initialize());
-app.use("/api", sessionsRouter, router, productRouter);
+app.use("/api", sessionsRouter, router, productRouter, productRouterApi);
 app.use("/", router2, routerProduct);
 
 app.get("/", (req, res) => {
-  res.json({ msg: "Hola locos." });
+  res.render("login");
 });
 
 export default app;

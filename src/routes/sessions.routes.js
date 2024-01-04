@@ -41,6 +41,10 @@ sessionsRouter.post("/sessions/login", async (req, res) => {
   return;
 });
 
+sessionsRouter.get("/sessions/logout", (req, res) => {
+  res.clearCookie("token");
+});
+
 sessionsRouter.get(
   "/sessions/github",
   passport.authenticate("github", { scope: ["user:email"] })

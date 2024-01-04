@@ -1,9 +1,11 @@
 <div class="container">
-  <h1> Products </h1>
+  <div class="grid">
+    <div><h2>Bienvenido: {{user.firstName}}</h2></div>
+    <div><h4>Cart: {{user.cid}}</h4></div>
+  </div>
   <h2>
     Page:
     {{paginateData.page}}
-    {{user.cid}}
   </h2>
   <div class="grid">
     <a href="{{paginateData.prevPage}}"  {{#unless paginateData.hasPrevPage}} disabled {{/unless}}  role="button" >Prev </a>

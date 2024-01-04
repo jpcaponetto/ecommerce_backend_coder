@@ -1,4 +1,4 @@
-import userModel from "../../models/user.model.js";
+import userModel from "../../dao/models/user.model.js";
 
 export const createUser = async (body, cid) => {
   const payload = { ...body, cid };

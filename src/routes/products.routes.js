@@ -6,6 +6,7 @@ import {
   updateProduct,
   deleteProduct,
 } from "../config/class/product.js";
+import productController from "../controllers/product.controllers.js";
 
 const productRouter = Router();
 
@@ -38,6 +39,14 @@ productRouter.delete("/products/:id", async (req, res) => {
   } catch (error) {
     return res.status(400).json({ msg: error.message });
   }
+});
+
+productRouter.post("/t", async (req, res) => {
+  const { body } = req;
+  try {
+    productController.createProduct(body);
+    return res.status(200).json({ msg: "Created" });
+  } catch (error) {}
 });
 
 productRouter.get("/products", async (req, res) => {
