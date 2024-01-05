@@ -14,4 +14,7 @@ export default class productDao {
   static deleteProduct(id) {
     return productSchema.deleteOne({ _id: id });
   }
+  static getProduct(id) {
+    return productSchema.findOne({ _id: id });
+  }
 }

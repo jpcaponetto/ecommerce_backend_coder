@@ -13,4 +13,7 @@ export default class productServices {
   static deleteProduct(id) {
     return productDao.deleteProduct(id);
   }
+  static getProduct(id) {
+    return productDao.getProduct(id);
+  }
 }

@@ -9,7 +9,6 @@ import { initPassport } from "./config/passport/passport.config.js";
 import router from "./routes/test.router.js";
 import sessionsRouter from "./routes/sessions.routes.js";
 import router2 from "./routes/views/login.js";
-import productRouter from "./routes/products.routes.js";
 import routerProduct from "./routes/views/renderProduct.js";
 import productRouterApi from "./routes/api/product.routes.js";
 
@@ -28,11 +27,15 @@ app.set("view engine", "handlebars");
 
 initPassport();
 app.use(passport.initialize());
-app.use("/api", sessionsRouter, router, productRouter, productRouterApi);
+app.use("/api", sessionsRouter, router, productRouterApi);
 app.use("/", router2, routerProduct);
 
 app.get("/", (req, res) => {
   res.render("login");
+});
+
+app.get((error, req, res, next) => {
+  res.status(error.code || 500).json({ error: error.message });
 });
 
 export default app;
