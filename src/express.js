@@ -11,6 +11,8 @@ import sessionsRouter from "./routes/sessions.routes.js";
 import router2 from "./routes/views/login.js";
 import routerProduct from "./routes/views/renderProduct.js";
 import productRouterApi from "./routes/api/product.routes.js";
+import cartRouter from "./routes/api/cart.routes.js";
+import userRouter from "./routes/api/user.routes.js";
 
 const app = express();
 
@@ -27,7 +29,14 @@ app.set("view engine", "handlebars");
 
 initPassport();
 app.use(passport.initialize());
-app.use("/api", sessionsRouter, router, productRouterApi);
+app.use(
+  "/api",
+  sessionsRouter,
+  router,
+  productRouterApi,
+  cartRouter,
+  userRouter
+);
 app.use("/", router2, routerProduct);
 
 app.get("/", (req, res) => {
