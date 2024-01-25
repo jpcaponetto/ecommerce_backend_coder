@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { outPassport } from "../../config/middlewares/outmiddlewares.js";
+import userDto from "../../dto/userDto.js";
 
 const router2 = Router();
 
@@ -12,8 +13,8 @@ router2.get("/register", (req, res) => {
 });
 
 router2.get("/profile", outPassport("jwt"), (req, res) => {
-  console.log(req.user);
-  res.render("profile", req.user);
+  const userData = new userDto(req.user);
+  res.render("profile", userData);
 });
 
 export default router2;

@@ -1,6 +1,10 @@
 import { Router } from "express";
 import productController from "../../controllers/product.controllers.js";
 import { paginateResponse } from "../../config/class/response.js";
+import {
+  authWitPassport,
+  outPassport,
+} from "../../config/middlewares/outmiddlewares.js";
 
 const productRouterApi = Router();
 
@@ -8,15 +12,20 @@ const productCtlr = new productController();
 
 //endpoints
 
-productRouterApi.post("/test/products", async (req, res, next) => {
-  const { body } = req;
-  try {
-    const product = await productCtlr.createProduct(body);
-    res.status(201).json(product);
-  } catch (error) {
-    next(error);
+productRouterApi.post(
+  "/test/products",
+  outPassport("jwt"),
+  authWitPassport(["admin"]),
+  async (req, res, next) => {
+    const { body } = req;
+    try {
+      const product = await productCtlr.createProduct(body);
+      res.status(201).json(product);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 productRouterApi.get("/test/products", async (req, res) => {
   const { limit = 10, page = 1, category, stock, sort } = req.query;
@@ -51,27 +60,41 @@ productRouterApi.get("/test/products/:id", async (req, res) => {
   } catch (error) {}
 });
 
-productRouterApi.put("/test/products/:id", async (req, res, next) => {
-  const { body } = req;
-  const { id } = req.params;
+productRouterApi.put(
+  "/test/products/:id",
+  outPassport("jwt"),
+  authWitPassport(["admin"]),
+  async (req, res, next) => {
+    const { body } = req;
+    const { id } = req.params;
 
-  try {
-    const product = await productCtlr.updateProduct(body, id);
-    res.status(201).json(product);
-  } catch (error) {
-    next(error);
+    try {
+      const product = await productCtlr.updateProduct(body, id);
+      res.status(201).json(product);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
-productRouterApi.delete("/test/products/:id", async (req, res, next) => {
-  const { id } = req.params;
-
-  try {
-    await productCtlr.deleteProduct(id);
-    res.status(200).json({ msg: "deleted" });
-  } catch (error) {
-    next(error);
+productRouterApi.delete(
+  "/test/products/:id",
+  outPassport("jwt"),
+  authWitPassport(["admin"]),
+  async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      await productCtlr.deleteProduct(id);
+      res.status(200).json({ msg: "deleted" });
+    } catch (error) {
+      next(error);
+    }
   }
+);
+
+productRouterApi.get("/test", async (req, res, next) => {
+  const msg = await productCtlr.test();
+  res.json(msg);
 });
 
 export default productRouterApi;

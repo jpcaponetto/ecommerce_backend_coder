@@ -9,14 +9,9 @@ import {
 
 const router = Router();
 
-router.get(
-  "/profile",
-  outPassport("jwt"),
-  authWitPassport(["A", "B"]),
-  (req, res) => {
-    res.render("home");
-  }
-);
+router.get("/profile", outPassport("jwt"), (req, res) => {
+  res.render("home");
+});
 
 router.get("/login", (req, res) => {
   const payload = { name: "nombre_example", role: "C" };

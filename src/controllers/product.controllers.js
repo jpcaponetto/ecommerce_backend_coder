@@ -37,4 +37,8 @@ export default class productController {
   getProduct(id) {
     return productServices.getProduct(id);
   }
+
+  test() {
+    return productServices.test();
+  }
 }

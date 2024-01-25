@@ -1,4 +1,5 @@
 import productDao from "../dao/product.dao.js";
+import { productRepo } from "../repositories/index.js";
 
 export default class productServices {
   static getAll(criteria, options) {
@@ -15,5 +16,8 @@ export default class productServices {
   }
   static getProduct(id) {
     return productDao.getProduct(id);
+  }
+  static test() {
+    return productRepo.test();
   }
 }

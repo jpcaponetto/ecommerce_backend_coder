@@ -1,0 +1,14 @@
+<div class="container">
+  <h1> C h a t -- Hola {{firstName}}</h1>
+
+  <label for="">
+    Enviar mensaje
+    <input type="text" placeholder="Enviar mensaje" id="inputmessage" />
+  </label>
+  <button onclick="sendmessage('{{firstName}}')">Enviar mensaje</button>
+  <div id="chat">
+
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/chat.js"></script>
+</div>

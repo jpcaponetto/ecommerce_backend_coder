@@ -13,6 +13,9 @@ import routerProduct from "./routes/views/renderProduct.js";
 import productRouterApi from "./routes/api/product.routes.js";
 import cartRouter from "./routes/api/cart.routes.js";
 import userRouter from "./routes/api/user.routes.js";
+import socketRouter from "./routes/views/socket/render.io.js";
+import adminRouter from "./routes/views/socket/render.admin.io.js";
+import twilioRouter from "./routes/api/twilio.routes.js";
 
 const app = express();
 
@@ -35,9 +38,10 @@ app.use(
   router,
   productRouterApi,
   cartRouter,
-  userRouter
+  userRouter,
+  twilioRouter
 );
-app.use("/", router2, routerProduct);
+app.use("/", router2, routerProduct, socketRouter, adminRouter);
 
 app.get("/", (req, res) => {
   res.render("login");

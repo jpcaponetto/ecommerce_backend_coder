@@ -17,4 +17,7 @@ export default class productDao {
   static getProduct(id) {
     return productSchema.findOne({ _id: id });
   }
+  static test() {
+    return "Hola desde Mongo ✅";
+  }
 }
