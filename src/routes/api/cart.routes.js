@@ -1,6 +1,7 @@
 import { Router } from "express";
 import cartSchema from "../../dao/models/cart.model.js";
 import cartController from "../../controllers/cart.controllers.js";
+import { outPassport } from "../../config/middlewares/outmiddlewares.js";
 
 const cartRouter = Router();
 
@@ -18,11 +19,14 @@ cartRouter.post("/test/cart", async (req, res, next) => {
   }
 });
 
-cartRouter.get("/test/cart/:cid/purchase", async (req, res, next) => {
-  const { cid } = req.params;
-  const out = await cartController.buyProduct(cid);
-  res.json(out);
-});
+cartRouter.post(
+  "/test/cart/:cid/purchase",
+  outPassport("jwt"),
+  async (req, res, next) => {
+    const out = await cartController.buyProduct(req.user);
+    res.json(out);
+  }
+);
 
 cartRouter.post("/test/cart/:cid/:pid", async (req, res, next) => {
   const { cid, pid } = req.params;

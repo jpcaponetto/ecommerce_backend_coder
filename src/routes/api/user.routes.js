@@ -32,6 +32,7 @@ userRouter.post("/session/out/login", async (req, res, next) => {
   if (pw) {
     const token = generateToken(user);
     res.cookie("token", token, env.dev.cookie.options);
+    return res.json(token);
     res.redirect("/profile");
   }
 });
