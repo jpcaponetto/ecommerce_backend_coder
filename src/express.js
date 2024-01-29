@@ -16,6 +16,7 @@ import userRouter from "./routes/api/user.routes.js";
 import socketRouter from "./routes/views/socket/render.io.js";
 import adminRouter from "./routes/views/socket/render.admin.io.js";
 import twilioRouter from "./routes/api/twilio.routes.js";
+import routerMocks from "./routes/api/mocks.products.routes.js";
 
 const app = express();
 
@@ -39,7 +40,8 @@ app.use(
   productRouterApi,
   cartRouter,
   userRouter,
-  twilioRouter
+  twilioRouter,
+  routerMocks
 );
 app.use("/", router2, routerProduct, socketRouter, adminRouter);
 

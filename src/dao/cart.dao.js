@@ -45,4 +45,8 @@ export default class cartDao {
     await cartSchema.updateOne({ _id: cid }, { $set: cart });
     return cart;
   }
+  static populate(cart) {
+    console.log(cart);
+    return cartSchema.findOne({ _id: cart }).populate("products.product");
+  }
 }

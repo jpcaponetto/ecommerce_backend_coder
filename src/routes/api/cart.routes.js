@@ -1,7 +1,8 @@
 import { Router } from "express";
-import cartController from "../../controllers/cart.controllers.js";
 import cartSchema from "../../dao/models/cart.model.js";
-const cartRouter = new Router();
+import cartController from "../../controllers/cart.controllers.js";
+
+const cartRouter = Router();
 
 cartRouter.get("/test/cart", async (req, res, next) => {
   const cart = await cartSchema.find();
@@ -16,8 +17,11 @@ cartRouter.post("/test/cart", async (req, res, next) => {
     next(error);
   }
 });
-cartRouter.post("/test/cart/:cid/purchase", (req, res, next) => {
-  res.json("words");
+
+cartRouter.get("/test/cart/:cid/purchase", async (req, res, next) => {
+  const { cid } = req.params;
+  const out = await cartController.buyProduct(cid);
+  res.json(out);
 });
 
 cartRouter.post("/test/cart/:cid/:pid", async (req, res, next) => {

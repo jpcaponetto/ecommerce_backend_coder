@@ -5,7 +5,6 @@ export default class productDao {
     return productSchema.paginate(criteria, options);
   }
   static createProduct(body) {
-    console.log("hola");
     return productSchema.create(body);
   }
   static updateProduct(body, id) {
@@ -17,7 +16,16 @@ export default class productDao {
   static getProduct(id) {
     return productSchema.findOne({ _id: id });
   }
-  static test() {
-    return "Hola desde Mongo ✅";
+  static async updateStock(idList, quantity) {
+    try {
+      await Promise.all(
+        idList.map(async (p, index) => {
+          await productSchema.updateOne(
+            { _id: p },
+            { $inc: { stock: quantity[index] } }
+          );
+        })
+      );
+    } catch (error) {}
   }
 }
