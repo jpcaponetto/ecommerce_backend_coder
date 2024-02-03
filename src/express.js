@@ -17,9 +17,12 @@ import socketRouter from "./routes/views/socket/render.io.js";
 import adminRouter from "./routes/views/socket/render.admin.io.js";
 import twilioRouter from "./routes/api/twilio.routes.js";
 import routerMocks from "./routes/api/mocks.products.routes.js";
+import { errorHandlers } from "./config/handlers/errorHandlers.js";
+import { middleraweLogger } from "./config/logger.js";
+import routerLogger from "./routes/api/logger.routes.js";
 
 const app = express();
-
+app.use(middleraweLogger);
 app.use(cookieParser(env.dev.cookie.secret));
 app.use(express.json()); // para que entienda un json pero en el body
 
@@ -41,7 +44,8 @@ app.use(
   cartRouter,
   userRouter,
   twilioRouter,
-  routerMocks
+  routerMocks,
+  routerLogger
 );
 app.use("/", router2, routerProduct, socketRouter, adminRouter);
 
@@ -49,8 +53,9 @@ app.get("/", (req, res) => {
   res.render("login");
 });
 
-app.get((error, req, res, next) => {
-  res.status(error.code || 500).json({ error: error.message });
-});
+// app.use((err, req, res, next) => {
+//   res.status(500).json(err);
+// });
+app.use(errorHandlers);
 
 export default app;

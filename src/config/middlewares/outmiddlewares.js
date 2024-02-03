@@ -1,4 +1,7 @@
 import passport from "passport";
+import customError from "../../utils/createError.js";
+import { outError } from "../../utils/causeError.js";
+import dirErrors from "../../utils/dirErrors.js";
 
 export const outPassport = (strategy) => (req, res, next) => {
   passport.authenticate(strategy, { session: false }, (err, payload, info) => {
@@ -6,9 +9,12 @@ export const outPassport = (strategy) => (req, res, next) => {
       return next(err);
     }
     if (!payload) {
-      return res
-        .status(401)
-        .json({ message: info.message ? info.message : info.toString() });
+      customError.errorCustom({
+        name: "No estas autenticado",
+        cause: outError(401),
+        message: "Tienes que autenticar",
+        code: dirErrors.outError,
+      });
     }
     req.user = payload;
     return next();
@@ -26,5 +32,10 @@ export const authWitPassport = (roleG) => (req, res, next) => {
     return next();
   }
 
-  return res.status(403).json({ msg: "Unauthorized" });
+  customError.errorCustom({
+    name: "Sin permiso ❌",
+    cause: outError(403),
+    message: "No tienes la autorización",
+    code: dirErrors.outError,
+  });
 };
