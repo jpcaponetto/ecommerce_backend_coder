@@ -13,7 +13,6 @@ commands.parse();
 export const banderas = commands.opts();
 
 const { wenv } = factory(banderas.e);
-console.log(wenv.mongo.jsonwebtoken.secret);
 
 const __filename = url.fileURLToPath(import.meta.url);
 export const _dirname = path.dirname(__filename);
@@ -32,7 +31,6 @@ export const validateToken = (token) => {
       if (error) {
         return resolve(false);
       }
-      console.log("payload", payload);
       resolve(payload);
     });
   });

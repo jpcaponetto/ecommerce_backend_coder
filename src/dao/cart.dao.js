@@ -46,7 +46,6 @@ export default class cartDao {
     return cart;
   }
   static populate(cart) {
-    console.log(cart);
     return cartSchema.findOne({ _id: cart }).populate("products.product");
   }
 }

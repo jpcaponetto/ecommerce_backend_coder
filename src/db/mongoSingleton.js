@@ -3,10 +3,12 @@ import { factory } from "../env/environment.js";
 import { banderas } from "../utils.js";
 import customError from "../utils/createError.js";
 import { dataBaseError } from "../utils/causeError.js";
+import { loggerFn } from "../config/logger.js";
 
 export default class MongoSingleton {
   constructor() {
     const { wenv } = factory(banderas.e);
+    const logger = loggerFn();
     try {
       this.connection = mongoose.connect(wenv.mongo.uri);
       customError.errorCustom({
@@ -16,9 +18,9 @@ export default class MongoSingleton {
         code: dirErrors.dataBaseError,
       });
     } catch (error) {
-      console.log("No se pudo logear");
+      logger.error("No se pudo logear");
     }
-    console.log("database connected 👍👍👍");
+    logger.info("Database connected 👍👍👍");
   }
   static returnInstance() {
     if (!MongoSingleton.instance) {

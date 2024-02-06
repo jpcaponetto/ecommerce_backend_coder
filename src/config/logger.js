@@ -55,3 +55,8 @@ export const middleraweLogger = (req, res, next) => {
   req.logger = loggerw;
   next();
 };
+
+export const loggerFn = () => {
+  const loggerw = banderas.e == "prod" ? productionLogger : developerLogger;
+  return loggerw;
+};

@@ -23,7 +23,6 @@ routerProduct.get("/products", outPassport("jwt"), async (req, res) => {
   const products = await getProducts(criteria, options);
   const paginate = paginateResponse(products);
 
-  console.log(req.user);
   res.render("products", { paginateData: paginate, user: req.user });
 });
 
