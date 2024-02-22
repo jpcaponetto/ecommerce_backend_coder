@@ -24,6 +24,11 @@ export default class Development {
         acountsid: process.env.ACOUNTSID,
         authtoken: process.env.AUTHTOKEN,
       },
+      mail: {
+        MAILUSER: process.env.MAILUSER,
+        MAILPASS: process.env.MAILPASS,
+        MAILPORT: process.env.MAILPORT,
+      },
     },
   };
 }

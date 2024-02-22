@@ -20,6 +20,8 @@ import routerMocks from "./routes/api/mocks.products.routes.js";
 import { errorHandlers } from "./config/handlers/errorHandlers.js";
 import { middleraweLogger } from "./config/logger.js";
 import routerLogger from "./routes/api/logger.routes.js";
+import testRouter from "./routes/api/test.routes.js";
+import nodeMailerRouter from "./routes/api/nodemailer.routes.js";
 
 const app = express();
 app.use(middleraweLogger);
@@ -45,7 +47,9 @@ app.use(
   userRouter,
   twilioRouter,
   routerMocks,
-  routerLogger
+  routerLogger,
+  testRouter,
+  nodeMailerRouter
 );
 app.use("/", router2, routerProduct, socketRouter, adminRouter);
 
