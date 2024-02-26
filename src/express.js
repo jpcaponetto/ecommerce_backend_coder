@@ -22,6 +22,7 @@ import { middleraweLogger } from "./config/logger.js";
 import routerLogger from "./routes/api/logger.routes.js";
 import testRouter from "./routes/api/test.routes.js";
 import nodeMailerRouter from "./routes/api/nodemailer.routes.js";
+import rrCarts from "./routes/api/cartRouter.js";
 
 const app = express();
 app.use(middleraweLogger);
@@ -38,6 +39,7 @@ app.set("view engine", "handlebars");
 
 initPassport();
 app.use(passport.initialize());
+app.use("/api/v2/carts", rrCarts);
 app.use(
   "/api",
   sessionsRouter,
