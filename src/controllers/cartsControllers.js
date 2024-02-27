@@ -19,4 +19,15 @@ const getById = async (req, res, next) => {
   }
 };
 
-export default { getCarts, getById };
+const populate = async (req, res, next) => {
+  const { id } = req.params;
+  const body = { _id: id };
+  try {
+    const cart = await cartServices.populate(body);
+    res.status(200).json(cart);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { getCarts, getById, populate };
