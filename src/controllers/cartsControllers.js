@@ -1,4 +1,6 @@
+import { addProductLogic } from "../custom/logic.js";
 import { cartServices } from "../services/services.js";
+
 const getCarts = async (req, res, next) => {
   try {
     const carts = await cartServices.getAll();
@@ -40,4 +42,16 @@ const createCart = async (req, res, next) => {
   }
 };
 
-export default { getCarts, getById, populate, createCart };
+const addCart = async (req, res, next) => {
+  const { id, pid } = req.params;
+  const { quantity } = req.body;
+  try {
+    const cart = await addProductLogic(id, pid, quantity);
+    await cartServices.update(id, cart);
+    res.json(cart);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { getCarts, getById, populate, createCart, addCart };
