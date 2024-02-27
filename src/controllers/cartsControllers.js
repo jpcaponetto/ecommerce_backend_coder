@@ -8,4 +8,15 @@ const getCarts = async (req, res, next) => {
   }
 };
 
-export default { getCarts };
+const getById = async (req, res, next) => {
+  const { id } = req.params;
+  const body = { _id: id };
+  try {
+    const carts = await cartServices.getBy(body);
+    res.status(200).json(carts);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { getCarts, getById };
