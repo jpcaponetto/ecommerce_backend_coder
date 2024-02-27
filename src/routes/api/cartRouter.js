@@ -6,5 +6,6 @@ const rrCarts = Router();
 rrCarts.get("/:id/populate", cltCarts.populate);
 rrCarts.get("/:id", cltCarts.getById);
 rrCarts.get("/", cltCarts.getCarts);
+rrCarts.post("/", cltCarts.createCart);
 
 export default rrCarts;

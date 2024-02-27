@@ -30,4 +30,14 @@ const populate = async (req, res, next) => {
   }
 };
 
-export default { getCarts, getById, populate };
+const createCart = async (req, res, next) => {
+  const body = { products: [] };
+  try {
+    const cart = await cartServices.save(body);
+    res.status(201).json(cart);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { getCarts, getById, populate, createCart };
